@@ -12,7 +12,7 @@
 		738D453A21AF1DB800F5B811 /* Palette.h in Headers */ = {isa = PBXBuildFile; fileRef = 738D452C21AF1DB800F5B811 /* Palette.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		73CCA2DF21AF1EB700CB8746 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCA2DE21AF1EB700CB8746 /* Palette.swift */; };
 		73CCA2E121AF1FC700CB8746 /* Android.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCA2E021AF1FC700CB8746 /* Android.swift */; };
-		73CCA2E321AF20B100CB8746 /* Bitmap+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCA2E221AF20B100CB8746 /* Bitmap+Palette.swift */; };
+		73CCA2E321AF20B100CB8746 /* Bitmap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCA2E221AF20B100CB8746 /* Bitmap.swift */; };
 		73CCA2E521AF20FA00CB8746 /* SwiftPriorityQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCA2E421AF20FA00CB8746 /* SwiftPriorityQueue.swift */; };
 		73CCA2E721AFD71C00CB8746 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCA2E621AFD71C00CB8746 /* Color.swift */; };
 		73CCA2E921AFD75100CB8746 /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCA2E821AFD75100CB8746 /* ColorUtils.swift */; };
@@ -43,7 +43,7 @@
 		738D453921AF1DB800F5B811 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73CCA2DE21AF1EB700CB8746 /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		73CCA2E021AF1FC700CB8746 /* Android.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Android.swift; sourceTree = "<group>"; };
-		73CCA2E221AF20B100CB8746 /* Bitmap+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bitmap+Palette.swift"; sourceTree = "<group>"; };
+		73CCA2E221AF20B100CB8746 /* Bitmap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bitmap.swift; sourceTree = "<group>"; };
 		73CCA2E421AF20FA00CB8746 /* SwiftPriorityQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftPriorityQueue.swift; sourceTree = "<group>"; };
 		73CCA2E621AFD71C00CB8746 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		73CCA2E821AFD75100CB8746 /* ColorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtils.swift; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 			children = (
 				73CCA2EC21AFDBA000CB8746 /* Supporting Files */,
 				73CCA2E021AF1FC700CB8746 /* Android.swift */,
-				73CCA2E221AF20B100CB8746 /* Bitmap+Palette.swift */,
+				73CCA2E221AF20B100CB8746 /* Bitmap.swift */,
 				73CCA2E621AFD71C00CB8746 /* Color.swift */,
 				73CCA2E821AFD75100CB8746 /* ColorUtils.swift */,
 				738D452C21AF1DB800F5B811 /* Palette.h */,
@@ -249,7 +249,7 @@
 			files = (
 				73CCA2EB21AFD84100CB8746 /* Rect.swift in Sources */,
 				73CCA2DF21AF1EB700CB8746 /* Palette.swift in Sources */,
-				73CCA2E321AF20B100CB8746 /* Bitmap+Palette.swift in Sources */,
+				73CCA2E321AF20B100CB8746 /* Bitmap.swift in Sources */,
 				73CCA2E121AF1FC700CB8746 /* Android.swift in Sources */,
 				73CCA2F021AFDFD200CB8746 /* ColorCutQuantizer.swift in Sources */,
 				73CCA2E921AFD75100CB8746 /* ColorUtils.swift in Sources */,
