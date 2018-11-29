@@ -11,8 +11,12 @@ import XCTest
 
 class PaletteTests: XCTestCase {
 
+    var logo: UIImage?
+    
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        logo = UIImage(named: "instagram_logo.jpg",
+                       in: Bundle(for: PaletteTests.self),
+                       compatibleWith: nil)
     }
 
     override func tearDown() {
@@ -24,10 +28,29 @@ class PaletteTests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testNotNil() {
+        //        guard let swatches = palette?.swatches else {
+        //            XCTFail("failed to generate palette")
+        //            return
+        //        }
+        //
+        //        XCTAssert(swatches.count > 0, "no swatch avaible")
+    }
+    
+    func testPalette27() {
+        
+        guard let logo = logo?.cgImage else {
+            return
+        }
+        
+        let palette = Palette.Builder(bitmap: logo)
+            .resizeBitmapArea(area: 1265)
+            //            .clearFilters()
+            .generate()
+        let swatches = palette.swatches
+        print("Total Color: \(swatches.count)")
+        for swatch in swatches {
+            //            print("Color: \(ColorInt.toHexString(swatch.rgb)), population: \(swatch.population)")
         }
     }
 

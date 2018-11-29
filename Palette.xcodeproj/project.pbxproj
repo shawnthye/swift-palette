@@ -11,6 +11,17 @@
 		738D453821AF1DB800F5B811 /* PaletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738D453721AF1DB800F5B811 /* PaletteTests.swift */; };
 		738D453A21AF1DB800F5B811 /* Palette.h in Headers */ = {isa = PBXBuildFile; fileRef = 738D452C21AF1DB800F5B811 /* Palette.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		73CCA2DF21AF1EB700CB8746 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCA2DE21AF1EB700CB8746 /* Palette.swift */; };
+		73CCA2E121AF1FC700CB8746 /* Android.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCA2E021AF1FC700CB8746 /* Android.swift */; };
+		73CCA2E321AF20B100CB8746 /* Bitmap+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCA2E221AF20B100CB8746 /* Bitmap+Palette.swift */; };
+		73CCA2E521AF20FA00CB8746 /* SwiftPriorityQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCA2E421AF20FA00CB8746 /* SwiftPriorityQueue.swift */; };
+		73CCA2E721AFD71C00CB8746 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCA2E621AFD71C00CB8746 /* Color.swift */; };
+		73CCA2E921AFD75100CB8746 /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCA2E821AFD75100CB8746 /* ColorUtils.swift */; };
+		73CCA2EB21AFD84100CB8746 /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCA2EA21AFD84100CB8746 /* Rect.swift */; };
+		73CCA2EE21AFDBE700CB8746 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCA2ED21AFDBE700CB8746 /* Target.swift */; };
+		73CCA2F021AFDFD200CB8746 /* ColorCutQuantizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCA2EF21AFDFD200CB8746 /* ColorCutQuantizer.swift */; };
+		73CCA2F221AFE04F00CB8746 /* ColorCutQuantizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCA2F121AFE04F00CB8746 /* ColorCutQuantizerTests.swift */; };
+		73CCA2F421AFE09C00CB8746 /* ColorCutQuantizerTestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCA2F321AFE09C00CB8746 /* ColorCutQuantizerTestExtension.swift */; };
+		73CCA2F721AFE11900CB8746 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCA2F621AFE11900CB8746 /* Tests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +42,17 @@
 		738D453721AF1DB800F5B811 /* PaletteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteTests.swift; sourceTree = "<group>"; };
 		738D453921AF1DB800F5B811 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73CCA2DE21AF1EB700CB8746 /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
+		73CCA2E021AF1FC700CB8746 /* Android.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Android.swift; sourceTree = "<group>"; };
+		73CCA2E221AF20B100CB8746 /* Bitmap+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bitmap+Palette.swift"; sourceTree = "<group>"; };
+		73CCA2E421AF20FA00CB8746 /* SwiftPriorityQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftPriorityQueue.swift; sourceTree = "<group>"; };
+		73CCA2E621AFD71C00CB8746 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		73CCA2E821AFD75100CB8746 /* ColorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtils.swift; sourceTree = "<group>"; };
+		73CCA2EA21AFD84100CB8746 /* Rect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rect.swift; sourceTree = "<group>"; };
+		73CCA2ED21AFDBE700CB8746 /* Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
+		73CCA2EF21AFDFD200CB8746 /* ColorCutQuantizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCutQuantizer.swift; sourceTree = "<group>"; };
+		73CCA2F121AFE04F00CB8746 /* ColorCutQuantizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCutQuantizerTests.swift; sourceTree = "<group>"; };
+		73CCA2F321AFE09C00CB8746 /* ColorCutQuantizerTestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCutQuantizerTestExtension.swift; sourceTree = "<group>"; };
+		73CCA2F621AFE11900CB8746 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,9 +95,17 @@
 		738D452B21AF1DB800F5B811 /* Palette */ = {
 			isa = PBXGroup;
 			children = (
-				73CCA2DD21AF1E8E00CB8746 /* src */,
+				73CCA2EC21AFDBA000CB8746 /* Supporting Files */,
+				73CCA2E021AF1FC700CB8746 /* Android.swift */,
+				73CCA2E221AF20B100CB8746 /* Bitmap+Palette.swift */,
+				73CCA2E621AFD71C00CB8746 /* Color.swift */,
+				73CCA2E821AFD75100CB8746 /* ColorUtils.swift */,
 				738D452C21AF1DB800F5B811 /* Palette.h */,
-				738D452D21AF1DB800F5B811 /* Info.plist */,
+				73CCA2DE21AF1EB700CB8746 /* Palette.swift */,
+				73CCA2EA21AFD84100CB8746 /* Rect.swift */,
+				73CCA2E421AF20FA00CB8746 /* SwiftPriorityQueue.swift */,
+				73CCA2ED21AFDBE700CB8746 /* Target.swift */,
+				73CCA2EF21AFDFD200CB8746 /* ColorCutQuantizer.swift */,
 			);
 			path = Palette;
 			sourceTree = "<group>";
@@ -83,18 +113,29 @@
 		738D453621AF1DB800F5B811 /* PaletteTests */ = {
 			isa = PBXGroup;
 			children = (
+				73CCA2F521AFE0F200CB8746 /* Supporting Files */,
 				738D453721AF1DB800F5B811 /* PaletteTests.swift */,
-				738D453921AF1DB800F5B811 /* Info.plist */,
+				73CCA2F621AFE11900CB8746 /* Tests.swift */,
+				73CCA2F121AFE04F00CB8746 /* ColorCutQuantizerTests.swift */,
+				73CCA2F321AFE09C00CB8746 /* ColorCutQuantizerTestExtension.swift */,
 			);
 			path = PaletteTests;
 			sourceTree = "<group>";
 		};
-		73CCA2DD21AF1E8E00CB8746 /* src */ = {
+		73CCA2EC21AFDBA000CB8746 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				73CCA2DE21AF1EB700CB8746 /* Palette.swift */,
+				738D452D21AF1DB800F5B811 /* Info.plist */,
 			);
-			path = src;
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		73CCA2F521AFE0F200CB8746 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				738D453921AF1DB800F5B811 /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -206,7 +247,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73CCA2EB21AFD84100CB8746 /* Rect.swift in Sources */,
 				73CCA2DF21AF1EB700CB8746 /* Palette.swift in Sources */,
+				73CCA2E321AF20B100CB8746 /* Bitmap+Palette.swift in Sources */,
+				73CCA2E121AF1FC700CB8746 /* Android.swift in Sources */,
+				73CCA2F021AFDFD200CB8746 /* ColorCutQuantizer.swift in Sources */,
+				73CCA2E921AFD75100CB8746 /* ColorUtils.swift in Sources */,
+				73CCA2E721AFD71C00CB8746 /* Color.swift in Sources */,
+				73CCA2EE21AFDBE700CB8746 /* Target.swift in Sources */,
+				73CCA2E521AF20FA00CB8746 /* SwiftPriorityQueue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,7 +263,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73CCA2F221AFE04F00CB8746 /* ColorCutQuantizerTests.swift in Sources */,
+				73CCA2F721AFE11900CB8746 /* Tests.swift in Sources */,
 				738D453821AF1DB800F5B811 /* PaletteTests.swift in Sources */,
+				73CCA2F421AFE09C00CB8746 /* ColorCutQuantizerTestExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
