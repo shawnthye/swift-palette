@@ -11,10 +11,10 @@
  * <p>The four ARGB components can be individually extracted from a color int
  * using the following expressions:</p>
  * <pre class="prettyprint">
- * int A = (color >> 24) & 0xff; // or color >>> 24
- * int R = (color >> 16) & 0xff;
- * int G = (color >>  8) & 0xff;
- * int B = (color      ) & 0xff;
+ * int A = (color >> 24) & 0xff // or color >>> 24
+ * int R = (color >> 16) & 0xff
+ * int G = (color >>  8) & 0xff
+ * int B = (color      ) & 0xff
  * </pre>
  */
 extension Color {

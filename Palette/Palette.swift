@@ -144,8 +144,8 @@ public final class Palette {
         let hsl = swatch.hsl
         
         var saturationScore: Float = 0
-        var luminanceScore: Float = 0;
-        var populationScore: Float = 0;
+        var luminanceScore: Float = 0
+        var populationScore: Float = 0
         
         let maxPopulation = dominantSwatch?.population ?? 1
         
@@ -204,12 +204,12 @@ extension Palette {
             mSwatches = nil
             
             // Add the default targets
-            mTargets.append(Target.LIGHT_VIBRANT);
-            mTargets.append(Target.VIBRANT);
-            mTargets.append(Target.DARK_VIBRANT);
-            mTargets.append(Target.LIGHT_MUTED);
-            mTargets.append(Target.MUTED);
-            mTargets.append(Target.DARK_MUTED);
+            mTargets.append(Target.LIGHT_VIBRANT)
+            mTargets.append(Target.VIBRANT)
+            mTargets.append(Target.DARK_VIBRANT)
+            mTargets.append(Target.LIGHT_MUTED)
+            mTargets.append(Target.MUTED)
+            mTargets.append(Target.DARK_MUTED)
         }
         
         /**
@@ -219,7 +219,7 @@ extension Palette {
         public init(swatches: [Swatch]) {
             if swatches.isEmpty {
                 assertionFailure("List of Swatches is not valid")
-                // throw new IllegalArgumentException("List of Swatches is not valid");
+                // throw new IllegalArgumentException("List of Swatches is not valid")
             }
             mFilters.append(Palette.defaultFilter)
             mSwatches = swatches
@@ -299,7 +299,7 @@ extension Palette {
                 assertionFailure("The given region must intersect with "
                     + "the Bitmap's dimensions.")
                 // throw new IllegalArgumentException("The given region must intersect with "
-                //     + "the Bitmap's dimensions.");
+                //     + "the Bitmap's dimensions.")
             }
             return self
         }
@@ -319,7 +319,7 @@ extension Palette {
          */
         public func addTarget(target: Target) -> Builder {
             if (!mTargets.contains(target)) {
-                mTargets.append(target);
+                mTargets.append(target)
             }
             return self
         }
@@ -354,7 +354,7 @@ extension Palette {
                     let scale = Double(bitmap.width) / Double(originalBitmap.width)
                     region.left = Int(floor(Double(region.left) * scale))
                     region.top = Int(floor(Double(region.top) * scale))
-                    region.right = min(Int(ceil(Double(region.right) * scale)), bitmap.width);
+                    region.right = min(Int(ceil(Double(region.right) * scale)), bitmap.width)
                     region.bottom = min(Int(ceil(Double(region.bottom) * scale)), bitmap.height)
                 }
                 
@@ -388,11 +388,7 @@ extension Palette {
             let bitmapHeight = bitmap.height
             var pixels = [ColorInt](repeating: 0, count: bitmapWidth * bitmapHeight)
             pixels.reserveCapacity(bitmapWidth * bitmapHeight)
-            bitmap.getPixels(pixels: &pixels,
-                             offset: 0,
-                             stride: bitmapWidth,
-                             x: 0, y: 0,
-                             width: bitmapWidth, height: bitmapHeight)
+            bitmap.getPixels(pixels: &pixels)
             
             guard let region = mRegion else {
                 // If we don't have a region, return all of the pixels
@@ -427,7 +423,7 @@ extension Palette {
                     scaleRatio = sqrt(Double(mResizeArea) / Double(bitmapArea))
                 }
             } else if (mResizeMaxDimension > 0) {
-                let maxDimension = max(bitmap.width, bitmap.height);
+                let maxDimension = max(bitmap.width, bitmap.height)
                 if (maxDimension > mResizeMaxDimension) {
                     scaleRatio = Double(mResizeMaxDimension) / Double(maxDimension)
                 }
@@ -438,7 +434,7 @@ extension Palette {
                 return bitmap
             }
             
-            return bitmap
+            return bitmap.resize(scaleRatio)
         }
     }
 }
@@ -484,7 +480,7 @@ extension Palette {
                 var hsl = _hsl ?? [Float](repeating: 0, count: 3)
                 
                 //redundant? why google do this?
-                ColorUtils.RGBToHSL(r: red, g: green, b: blue, outHsl: &hsl);
+                ColorUtils.RGBToHSL(r: red, g: green, b: blue, outHsl: &hsl)
                 return hsl
             }
         }
@@ -544,8 +540,8 @@ extension Palette {
                 if (darkBodyAlpha != -1 && darkTitleAlpha != -1) {
                     // If we found valid dark values, use them and return
                     _bodyTextColor = ColorUtils.setAlphaComponent(color: Color.BLACK, alpha: darkBodyAlpha)
-                    _titleTextColor = ColorUtils.setAlphaComponent(color: Color.BLACK, alpha: darkTitleAlpha);
-                    generatedTextColors = true;
+                    _titleTextColor = ColorUtils.setAlphaComponent(color: Color.BLACK, alpha: darkTitleAlpha)
+                    generatedTextColors = true
                     return
                 }
                 
@@ -553,11 +549,11 @@ extension Palette {
                 // lightness, we need to use mismatched values
                 _bodyTextColor = lightBodyAlpha != -1
                     ? ColorUtils.setAlphaComponent(color: Color.WHITE, alpha: lightBodyAlpha)
-                    : ColorUtils.setAlphaComponent(color: Color.BLACK, alpha: darkBodyAlpha);
+                    : ColorUtils.setAlphaComponent(color: Color.BLACK, alpha: darkBodyAlpha)
                 _titleTextColor = lightTitleAlpha != -1
                     ? ColorUtils.setAlphaComponent(color: Color.WHITE, alpha: lightTitleAlpha)
-                    : ColorUtils.setAlphaComponent(color: Color.BLACK, alpha: darkTitleAlpha);
-                generatedTextColors = true;
+                    : ColorUtils.setAlphaComponent(color: Color.BLACK, alpha: darkTitleAlpha)
+                generatedTextColors = true
             }
         }
         
@@ -571,7 +567,7 @@ extension Palette.Swatch: Hashable {
     }
     
     public var hashValue: Int {
-        return 31 * rgb + population;
+        return 31 * rgb + population
     }
 }
 
@@ -589,28 +585,28 @@ extension Palette {
         private static let whiteMinLightness: Float = 0.95
         
         func isAllowed(_ rgb: Int, _ hsl: [Float]) -> Bool {
-            return !isWhite(hsl) && !isBlack(hsl) && !isNearRedILine(hsl);
+            return !isWhite(hsl) && !isBlack(hsl) && !isNearRedILine(hsl)
         }
         
         /**
          * @return true if the color represents a color which is close to black.
          */
         private func isBlack(_ hslColor: [Float]) -> Bool {
-            return hslColor[2] <= DefaultFilter.blackMaxLightness;
+            return hslColor[2] <= DefaultFilter.blackMaxLightness
         }
         
         /**
          * @return true if the color represents a color which is close to white.
          */
         private func isWhite(_ hslColor: [Float]) -> Bool {
-            return hslColor[2] >= DefaultFilter.whiteMinLightness;
+            return hslColor[2] >= DefaultFilter.whiteMinLightness
         }
         
         /**
          * @return true if the color lies close to the red side of the I line.
          */
         private func isNearRedILine(_ hslColor: [Float]) -> Bool {
-            return hslColor[0] >= 10.0 && hslColor[0] <= 37.0 && hslColor[1] <= 0.82;
+            return hslColor[0] >= 10.0 && hslColor[0] <= 37.0 && hslColor[1] <= 0.82
         }
     }
 }

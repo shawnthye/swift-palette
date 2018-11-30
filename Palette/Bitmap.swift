@@ -8,6 +8,28 @@
 
 extension Bitmap {
     
+    func resize(_ scaleRatio: Double) -> Bitmap {
+        let image = UIImage(cgImage: self)
+        let size = image.size.applying(CGAffineTransform(scaleX: CGFloat(scaleRatio), y: CGFloat(scaleRatio)))
+        
+        //let hasAlpha = false
+        //let scale: CGFloat = 1.0
+        
+        //UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, scale)
+        UIGraphicsBeginImageContext(size)
+        image.draw(in: CGRect(origin: .zero, size: size))
+        
+        let context = UIGraphicsGetImageFromCurrentImageContext()
+        let scaledBitmap = context?.cgImage
+        UIGraphicsEndImageContext()
+        
+        guard let bitmap = scaledBitmap else {
+            return self
+        }
+        
+        return bitmap
+    }
+    
     private func createARGBBitmapContext() -> CGContext? {
         
         //Get image width, height
@@ -36,35 +58,40 @@ extension Bitmap {
         return context
     }
     
-    func resize(_ scaleRatio: Double) -> Bitmap {
-        let image = UIImage(cgImage: self)
-        let size = image.size.applying(CGAffineTransform(scaleX: CGFloat(scaleRatio), y: CGFloat(scaleRatio)))
-        
-        let hasAlpha = false
-        let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
-        
-        UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, scale)
-        //        UIGraphicsBeginImageContext(size)
-        image.draw(in: CGRect(origin: .zero, size: size))
-        
-        let context = UIGraphicsGetImageFromCurrentImageContext()
-        let scaledBitmap = context?.cgImage
-        UIGraphicsEndImageContext()
-        
-        guard let bitmap = scaledBitmap else {
-            return self
-        }
-        
-        return bitmap
-    }
-    
-    func getPixels(pixels: inout [ColorInt], offset: Int, stride: Int, x: Int, y: Int, width: Int, height: Int) {
+    /**
+     * Returns in pixels[] a copy of the data in the bitmap. Each value is
+     * a packed int representing a {@link Color}. The stride parameter allows
+     * the caller to allow for gaps in the returned pixels array between
+     * rows. For normal packed results, just pass width for the stride value.
+     * The returned colors are non-premultiplied ARGB values in the
+     * {@link ColorSpace.Named#SRGB sRGB} color space.
+     *
+     * @param pixels   The array to receive the bitmap's colors
+     * @param offset   The first index to write into pixels[]
+     * @param stride   The number of entries in pixels[] to skip between
+     *                 rows (must be >= bitmap's width). Can be negative.
+     * @param x        The x coordinate of the first pixel to read from
+     *                 the bitmap
+     * @param y        The y coordinate of the first pixel to read from
+     *                 the bitmap
+     * @param width    The number of pixels to read from each row
+     * @param height   The number of rows to read
+     *
+     * @throws IllegalArgumentException if x, y, width, height exceed the
+     *         bounds of the bitmap, or if abs(stride) < width.
+     * @throws ArrayIndexOutOfBoundsException if the pixels array is too small
+     *         to receive the specified number of pixels.
+     * @throws IllegalStateException if the bitmap's config is {@link Config#HARDWARE}
+     */
+    func getPixels(pixels: inout [ColorInt]) {
         guard let context = self.createARGBBitmapContext() else {
             return
         }
         
         let pixelsWide = self.width
         let pixelsHigh = self.height
+        let bytesPerPixel = context.bitsPerPixel / 8
+        
         let rect = CGRect(x: 0, y: 0, width: pixelsWide, height: pixelsHigh)
         
         //Clear the context
@@ -81,22 +108,17 @@ extension Bitmap {
             return
         }
         
-        let dataType = UnsafeMutablePointer<UInt8>(data)
+        let bytes = UnsafeMutablePointer<UInt8>(data)
         
-        for i in 0..<width * height {
-            let offset = i * 4
-            let alpha = dataType[offset]
-            let red = dataType[offset + 1]
-            let green = dataType[offset + 2]
-            let blue = dataType[offset + 3]
-            pixels[i] = Color.argb(alpha: Int(alpha),
-                                   red: Int(red),
-                                   green: Int(green),
-                                   blue: Int(blue))
+        for y in 0..<pixelsHigh {
+            for x in 0..<pixelsWide {
+                let pos = (y * pixelsWide) + x
+                let pixel = pos * bytesPerPixel
+                pixels[pos] = Color.argb(alpha: Int(bytes[pixel]),
+                                           red: Int(bytes[pixel + 1]),
+                                           green: Int(bytes[pixel + 2]),
+                                           blue: Int(bytes[pixel + 3]))
+            }
         }
-        
-        
-        
-        pixels = [Int](pixels[x * y..<width * height])
     }
 }

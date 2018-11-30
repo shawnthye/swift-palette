@@ -38,19 +38,18 @@ class PaletteTests: XCTestCase {
     }
     
     func testPalette27() {
-        
         guard let logo = logo?.cgImage else {
             return
         }
         
         let palette = Palette.Builder(bitmap: logo)
-            .resizeBitmapArea(area: 1265)
-            //            .clearFilters()
+//            .resizeBitmapArea(area: 1265)
+            .clearFilters()
             .generate()
         let swatches = palette.swatches
         print("Total Color: \(swatches.count)")
         for swatch in swatches {
-            //            print("Color: \(ColorInt.toHexString(swatch.rgb)), population: \(swatch.population)")
+            print("Color: \(ColorInt.toHexString(swatch.rgb)), population: \(swatch.population)")
         }
     }
 

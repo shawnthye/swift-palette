@@ -20,29 +20,29 @@ final class ColorUtils {
      * Composite two potentially translucent colors over each other and returns the result.
      */
     public static func compositeColors(foreground: ColorInt, background: ColorInt) -> Int {
-        let bgAlpha = Color.alpha(background);
-        let fgAlpha = Color.alpha(foreground);
-        let a = compositeAlpha(fgAlpha, bgAlpha);
+        let bgAlpha = Color.alpha(background)
+        let fgAlpha = Color.alpha(foreground)
+        let a = compositeAlpha(fgAlpha, bgAlpha)
         
         let r = compositeComponent(Color.red(foreground), fgAlpha,
                                    Color.red(background), bgAlpha, a)
         let g = compositeComponent(Color.green(foreground), fgAlpha,
-                                   Color.green(background), bgAlpha, a);
+                                   Color.green(background), bgAlpha, a)
         let b = compositeComponent(Color.blue(foreground), fgAlpha,
-                                   Color.blue(background), bgAlpha, a);
+                                   Color.blue(background), bgAlpha, a)
         
-        return Color.argb(alpha: a, red: r, green: g, blue: b);
+        return Color.argb(alpha: a, red: r, green: g, blue: b)
     }
     
     private static func compositeAlpha(_ foregroundAlpha: Int, _ backgroundAlpha: Int) -> Int {
-        return 0xFF - (((0xFF - backgroundAlpha) * (0xFF - foregroundAlpha)) / 0xFF);
+        return 0xFF - (((0xFF - backgroundAlpha) * (0xFF - foregroundAlpha)) / 0xFF)
     }
     
     private static func compositeComponent(_ fgC: Int, _ fgA: Int, _ bgC: Int, _ bgA: Int, _ a: Int) -> Int {
         if a == 0 {
             return 0
         }
-        return ((0xFF * fgC * fgA) + (bgC * bgA * (0xFF - fgA))) / (a * 0xFF);
+        return ((0xFF * fgC * fgA) + (bgC * bgA * (0xFF - fgA))) / (a * 0xFF)
     }
     
     /**
@@ -51,8 +51,8 @@ final class ColorUtils {
      * - @FloatRange(from = 0.0, to = 1.0)
      */
     public static func calculateLuminance(color: ColorInt) -> Double {
-        var result = getTempDouble3Array();
-        colorToXYZ(color: color, outXyz: &result);
+        var result = getTempDouble3Array()
+        colorToXYZ(color: color, outXyz: &result)
         // Luminance is the Y component
         return result[1] / 100
     }
@@ -71,14 +71,14 @@ final class ColorUtils {
         }
         if (Color.alpha(foreground) < 255) {
             // If the foreground is translucent, composite the foreground over the background
-            foreground = compositeColors(foreground: foreground, background: background);
+            foreground = compositeColors(foreground: foreground, background: background)
         }
         
         let luminance1 = calculateLuminance(color: foreground) + 0.05
         let luminance2 = calculateLuminance(color: background) + 0.05
         
         // Now return the lighter luminance divided by the darker luminance
-        return max(luminance1, luminance2) / min(luminance1, luminance2);
+        return max(luminance1, luminance2) / min(luminance1, luminance2)
     }
     
     /**
@@ -93,13 +93,13 @@ final class ColorUtils {
      */
     public static func calculateMinimumAlpha(foreground: ColorInt, background: ColorInt, minContrastRatio: Float) -> Int {
         if (Color.alpha(background) != 255) {
-            // throw new IllegalArgumentException("background can not be translucent: #" + Integer.toHexString(background));
+            // throw new IllegalArgumentException("background can not be translucent: #" + Integer.toHexString(background))
             assertionFailure("background can not be translucent: #\(ColorInt.toHexString(background))")
             
         }
         
         // First lets check that a fully opaque foreground has sufficient contrast
-        var testForeground = setAlphaComponent(color: foreground, alpha: 255);
+        var testForeground = setAlphaComponent(color: foreground, alpha: 255)
         var testRatio = Float(calculateContrast(foreground: &testForeground, background: background))
         if (testRatio < minContrastRatio) {
             // Fully opaque foreground does not have sufficient contrast, return error
@@ -107,28 +107,28 @@ final class ColorUtils {
         }
         
         // Binary search to find a value with the minimum value which provides sufficient contrast
-        var numIterations = 0;
-        var minAlpha = 0;
-        var maxAlpha = 255;
+        var numIterations = 0
+        var minAlpha = 0
+        var maxAlpha = 255
         
         while (numIterations <= minAlphaSearchMaxIterations &&
             (maxAlpha - minAlpha) > minAlphaSearchPrecision) {
-                let testAlpha = (minAlpha + maxAlpha) / 2;
+                let testAlpha = (minAlpha + maxAlpha) / 2
                 
-                testForeground = setAlphaComponent(color: foreground, alpha: testAlpha);
+                testForeground = setAlphaComponent(color: foreground, alpha: testAlpha)
                 testRatio = Float(calculateContrast(foreground: &testForeground, background: background))
                 
                 if (testRatio < minContrastRatio) {
-                    minAlpha = testAlpha;
+                    minAlpha = testAlpha
                 } else {
-                    maxAlpha = testAlpha;
+                    maxAlpha = testAlpha
                 }
                 
                 numIterations += 1
         }
         
         // Conservatively return the max of the range of possible alphas, which is known to pass.
-        return maxAlpha;
+        return maxAlpha
     }
     
     /**
@@ -154,7 +154,7 @@ final class ColorUtils {
         let deltaMaxMin = max - min
         
         var h, s: Float
-        let l = (max + min) / 2;
+        let l = (max + min) / 2
         
         if (max == min) {
             // Monochromatic
@@ -162,19 +162,19 @@ final class ColorUtils {
             s = 0
         } else {
             if (max == rf) {
-                h = ((gf - bf) / deltaMaxMin).truncatingRemainder(dividingBy: 6.0);
+                h = ((gf - bf) / deltaMaxMin).truncatingRemainder(dividingBy: 6.0)
             } else if (max == gf) {
-                h = ((bf - rf) / deltaMaxMin) + 2;
+                h = ((bf - rf) / deltaMaxMin) + 2
             } else {
-                h = ((rf - gf) / deltaMaxMin) + 4;
+                h = ((rf - gf) / deltaMaxMin) + 4
             }
             
-            s = deltaMaxMin / (1 - abs(2 * l - 1));
+            s = deltaMaxMin / (1 - abs(2 * l - 1))
         }
         
         h = (h * 60).truncatingRemainder(dividingBy: 360.0)
-        if (h < 0) {
-            h += 360;
+        if h < 0 {
+            h += 360
         }
         
         outHsl[0] = constrain(h, 0.0, 360.0)
@@ -194,7 +194,7 @@ final class ColorUtils {
      * @param outHsl 3-element array which holds the resulting HSL components
      */
     public static func colorToHSL(color: ColorInt, outHsl: inout [Float]) {
-        RGBToHSL(r: Color.red(color), g: Color.green(color), b: Color.blue(color), outHsl: &outHsl);
+        RGBToHSL(r: Color.red(color), g: Color.green(color), b: Color.blue(color), outHsl: &outHsl)
     }
     
     /**
@@ -227,41 +227,41 @@ final class ColorUtils {
             r = Int(round(255 * (c + m)))
             g = Int(round(255 * (x + m)))
             b = Int(round(255 * m))
-            break;
+            break
         case 1:
             r = Int(round(255 * (x + m)))
             g = Int(round(255 * (c + m)))
             b = Int(round(255 * m))
-            break;
+            break
         case 2:
             r = Int(round(255 * m))
             g = Int(round(255 * (c + m)))
             b = Int(round(255 * (x + m)))
-            break;
+            break
         case 3:
             r = Int(round(255 * m))
             g = Int(round(255 * (x + m)))
             b = Int(round(255 * (c + m)))
-            break;
+            break
         case 4:
             r = Int(round(255 * (x + m)))
             g = Int(round(255 * m))
             b = Int(round(255 * (c + m)))
-            break;
+            break
         case 5, 6:
             r = Int(round(255 * (c + m)))
             g = Int(round(255 * m))
             b = Int(round(255 * (x + m)))
-            break;
+            break
         default:
             break
         }
         
-        r = constrain(r, 0, 255);
-        g = constrain(g, 0, 255);
-        b = constrain(b, 0, 255);
+        r = constrain(r, 0, 255)
+        g = constrain(g, 0, 255)
+        b = constrain(b, 0, 255)
         
-        return Color.rgb(red: r, green: g, blue: b);
+        return Color.rgb(red: r, green: g, blue: b)
     }
     
     /**
@@ -270,10 +270,10 @@ final class ColorUtils {
      */
     public static func setAlphaComponent(color: ColorInt, alpha: Int) -> ColorInt {
         if (alpha < 0 || alpha > 255) {
-            // throw new IllegalArgumentException("alpha must be between 0 and 255.");
+            // throw new IllegalArgumentException("alpha must be between 0 and 255.")
             assertionFailure("alpha must be between 0 and 255.")
         }
-        return (color & 0x00ffffff) | (alpha << 24);
+        return (color & 0x00ffffff) | (alpha << 24)
     }
     
     /**
@@ -295,7 +295,7 @@ final class ColorUtils {
         RGBToXYZ(r: Color.red(color),
                  g: Color.green(color),
                  b: Color.blue(color),
-                 outXyz: &outXyz);
+                 outXyz: &outXyz)
     }
     
     /**
@@ -317,28 +317,28 @@ final class ColorUtils {
      */
     public static func RGBToXYZ(r: Int, g: Int, b: Int, outXyz: inout [Double]) {
         if (outXyz.count != 3) {
-            // throw new IllegalArgumentException("outXyz must have a length of 3.");
+            // throw new IllegalArgumentException("outXyz must have a length of 3.")
             assertionFailure("outXyz must have a length of 3.")
         }
         
         var sr = Double(r) / 255.0
         sr = sr < 0.04045 ? sr / 12.92 : pow((sr + 0.055) / 1.055, 2.4)
-        var sg = Double(g) / 255.0;
-        sg = sg < 0.04045 ? sg / 12.92 : pow((sg + 0.055) / 1.055, 2.4);
-        var sb = Double(b) / 255.0;
-        sb = sb < 0.04045 ? sb / 12.92 : pow((sb + 0.055) / 1.055, 2.4);
+        var sg = Double(g) / 255.0
+        sg = sg < 0.04045 ? sg / 12.92 : pow((sg + 0.055) / 1.055, 2.4)
+        var sb = Double(b) / 255.0
+        sb = sb < 0.04045 ? sb / 12.92 : pow((sb + 0.055) / 1.055, 2.4)
         
-        outXyz[0] = 100 * (sr * 0.4124 + sg * 0.3576 + sb * 0.1805);
-        outXyz[1] = 100 * (sr * 0.2126 + sg * 0.7152 + sb * 0.0722);
-        outXyz[2] = 100 * (sr * 0.0193 + sg * 0.1192 + sb * 0.9505);
+        outXyz[0] = 100 * (sr * 0.4124 + sg * 0.3576 + sb * 0.1805)
+        outXyz[1] = 100 * (sr * 0.2126 + sg * 0.7152 + sb * 0.0722)
+        outXyz[2] = 100 * (sr * 0.0193 + sg * 0.1192 + sb * 0.9505)
     }
     
     private static func constrain(_ amount: Float, _ low: Float, _ high: Float) -> Float {
-        return amount < low ? low : (amount > high ? high : amount);
+        return amount < low ? low : (amount > high ? high : amount)
     }
     
     private static func constrain(_ amount: Int, _ low: Int, _ high: Int) -> Int {
-        return amount < low ? low : (amount > high ? high : amount);
+        return amount < low ? low : (amount > high ? high : amount)
     }
     
     private static func getTempDouble3Array() -> [Double] {
