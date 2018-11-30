@@ -17,15 +17,12 @@ class PaletteTests: XCTestCase {
         logo = UIImage(named: "instagram_logo.jpg",
                        in: Bundle(for: PaletteTests.self),
                        compatibleWith: nil)
+        
+        assert(logo != nil, "logo not found")
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 
     func testNotNil() {
@@ -37,8 +34,9 @@ class PaletteTests: XCTestCase {
         //        XCTAssert(swatches.count > 0, "no swatch avaible")
     }
     
-    func testPalette27() {
+    func testBitmap() {
         guard let logo = logo?.cgImage else {
+            
             return
         }
         

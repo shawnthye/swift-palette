@@ -353,6 +353,6 @@ final class ColorUtils {
 
 extension ColorInt {
     public static func toHexString(_ i: Int) -> String {
-        return String(format: "#%08X", 0xFFFFFFFF & i)
+        return String(format: "#%08X", Int(bitPattern: 0xFFFFFFFF) & i)
     }
 }

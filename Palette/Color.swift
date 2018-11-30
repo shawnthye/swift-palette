@@ -19,8 +19,8 @@
  */
 extension Color {
     
-    public static let BLACK: ColorInt = 0xFF000000
-    public static let WHITE: ColorInt = 0xFFFFFFFF
+    public static let BLACK = Int(bitPattern: 0xFF000000)
+    public static let WHITE = Int(bitPattern: 0xFFFFFFFF)
     
     /**
      * Return the alpha component of a color int. This is the same as saying
@@ -72,7 +72,7 @@ extension Color {
      *   - blue: Blue component \([0..255]\) of the color
      */
     public static func rgb(red: Int, green: Int, blue: Int) -> ColorInt {
-        return 0xff000000 | (red << 16) | (green << 8) | blue
+        return Int(bitPattern: 0xff000000) | (red << 16) | (green << 8) | blue
     }
     
     /**

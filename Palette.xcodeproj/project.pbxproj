@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		736CFF0721B1C32300CB2725 /* instagram_logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 736CFF0621B1C32300CB2725 /* instagram_logo.jpg */; };
 		738D453321AF1DB800F5B811 /* Palette.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738D452921AF1DB800F5B811 /* Palette.framework */; };
 		738D453821AF1DB800F5B811 /* PaletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738D453721AF1DB800F5B811 /* PaletteTests.swift */; };
 		738D453A21AF1DB800F5B811 /* Palette.h in Headers */ = {isa = PBXBuildFile; fileRef = 738D452C21AF1DB800F5B811 /* Palette.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		736CFF0621B1C32300CB2725 /* instagram_logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = instagram_logo.jpg; sourceTree = "<group>"; };
 		738D452921AF1DB800F5B811 /* Palette.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Palette.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		738D452C21AF1DB800F5B811 /* Palette.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Palette.h; sourceTree = "<group>"; };
 		738D452D21AF1DB800F5B811 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -74,6 +76,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		736CFF0521B1C30C00CB2725 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				736CFF0621B1C32300CB2725 /* instagram_logo.jpg */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		738D451F21AF1DB800F5B811 = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +123,7 @@
 		738D453621AF1DB800F5B811 /* PaletteTests */ = {
 			isa = PBXGroup;
 			children = (
+				736CFF0521B1C30C00CB2725 /* Resources */,
 				73CCA2F521AFE0F200CB8746 /* Supporting Files */,
 				738D453721AF1DB800F5B811 /* PaletteTests.swift */,
 				73CCA2F621AFE11900CB8746 /* Tests.swift */,
@@ -237,6 +248,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				736CFF0721B1C32300CB2725 /* instagram_logo.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
