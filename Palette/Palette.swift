@@ -24,6 +24,13 @@ public final class Palette {
     
     private var dominantSwatch: Swatch?
     
+    /**
+     * Start generating a {@link Palette} with the returned {@link Builder} instance.
+     */
+    public static func from(bitmap: CGImage) -> Builder {
+       return Builder(bitmap: bitmap)
+    }
+    
     init(swatches: [Swatch], targets: [Target]) {
         self.swatches = swatches
         self.targets = targets
@@ -381,6 +388,21 @@ extension Palette {
             // LOG: Created Palette
             
             return p
+        }
+        
+        /**
+         * Generate the {@link Palette} asynchronously. The provided listener's
+         * {@link PaletteAsyncListener#onGenerated} method will be called with the palette when
+         * generated.
+         *  - Parameter callBack: callBack
+         */
+        public func generate(_ async: ((Palette) -> Void)?) {
+            DispatchQueue.global(qos: .default).async {
+                let p = self.generate()
+                DispatchQueue.main.async {
+                    async?(p)
+                }
+            }
         }
         
         private func getPixelsFromBitmap(_ bitmap: CGImage) -> [Int] {
