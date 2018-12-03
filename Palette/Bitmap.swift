@@ -110,15 +110,19 @@ extension Bitmap {
         
         let bytes = UnsafeMutablePointer<UInt8>(data)
         
-        for y in 0..<pixelsHigh {
-            for x in 0..<pixelsWide {
+        var y = pixelsHigh - 1
+        while y >= 0 {
+            var x = pixelsWide - 1
+            while x >= 0 {
                 let pos = (y * pixelsWide) + x
                 let pixel = pos * bytesPerPixel
                 pixels[pos] = Color.argb(alpha: Int(bytes[pixel]),
-                                           red: Int(bytes[pixel + 1]),
-                                           green: Int(bytes[pixel + 2]),
-                                           blue: Int(bytes[pixel + 3]))
+                                         red: Int(bytes[pixel + 1]),
+                                         green: Int(bytes[pixel + 2]),
+                                         blue: Int(bytes[pixel + 3]))
+                x += -1
             }
+            y += -1
         }
     }
 }
