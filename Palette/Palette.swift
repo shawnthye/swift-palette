@@ -641,3 +641,9 @@ extension Palette.Swatch {
                        alpha: 1)
     }
 }
+
+extension Palette.Swatch {
+    public var hexadecimalOfRGB: String? {
+        return ColorInt.toHexadecimalOfRGB((red << 16) | (green << 8) | blue)
+    }
+}
