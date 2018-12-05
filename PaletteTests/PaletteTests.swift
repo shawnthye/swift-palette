@@ -17,7 +17,6 @@ class PaletteTests: XCTestCase {
         logo = UIImage(named: "instagram_logo.jpg",
                        in: Bundle(for: PaletteTests.self),
                        compatibleWith: nil)
-        
         assert(logo != nil, "logo not found")
     }
     
@@ -35,7 +34,6 @@ class PaletteTests: XCTestCase {
         
         let swatches = palette.swatches
         XCTAssertEqual(swatches.count, 16)
-
     }
     
     func testGenerateAsync() {
@@ -49,9 +47,8 @@ class PaletteTests: XCTestCase {
             .generate { palette in
                 results = palette.swatches
                 expectation.fulfill()
-                
-                
         }
+        
         wait(for: [expectation], timeout: 5)
         
         XCTAssertNotNil(results)
@@ -62,11 +59,11 @@ class PaletteTests: XCTestCase {
         }
         
         XCTAssertEqual(swatches.count, 16)
+        
         print("Total Color: \(swatches.count)")
         for swatch in swatches {
             print("Color: \(ColorInt.toHexString(swatch.rgb)), population: \(swatch.population)")
         }
-        
     }
     
 }
