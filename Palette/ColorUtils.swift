@@ -351,8 +351,29 @@ final class ColorUtils {
     }
 }
 
-extension ColorInt {
-    public static func toHexString(_ i: Int) -> String {
-        return String(format: "#%08X", Int(bitPattern: 0xFFFFFFFF) & i)
+extension Color {
+    public var rgbHexadecimal: String? {
+        
+        guard let components = cgColor.components, components.count >= 3 else {
+            return nil
+        }
+        
+        let r = Int(components[0] * 255.0 + 0.5) << 16
+        let g = Int(components[1] * 255.0 + 0.5) << 8
+        let b = Int(components[2] * 255.0 + 0.5)
+        let rgb = r | g | b
+        
+        return ColorInt.toRgbHexadecimal(rgb)
     }
 }
+
+extension ColorInt {
+    public static func toHexString(_ i: Int) -> String {
+        return String(format: "%08X", Int(bitPattern: 0xFFFFFFFF) & i)
+    }
+    
+    public static func toRgbHexadecimal(_ i: Int) -> String {
+        return String(format: "%06X", Int(bitPattern: 0xFFFFFF) & i)
+    }
+}
+

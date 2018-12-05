@@ -28,7 +28,7 @@ public final class Palette {
      * Start generating a {@link Palette} with the returned {@link Builder} instance.
      */
     public static func from(bitmap: CGImage) -> Builder {
-       return Builder(bitmap: bitmap)
+        return Builder(bitmap: bitmap)
     }
     
     init(swatches: [Swatch], targets: [Target]) {
@@ -582,17 +582,6 @@ extension Palette {
     }
 }
 
-extension Palette.Swatch: Hashable {
-    
-    public static func == (lhs: Palette.Swatch, rhs: Palette.Swatch) -> Bool {
-        return lhs.population == rhs.population && lhs.rgb == rhs.rgb
-    }
-    
-    public var hashValue: Int {
-        return 31 * rgb + population
-    }
-}
-
 public protocol PaletteFilter {
     func isAllowed(_ rgb: Int, _ hsl: [Float]) -> Bool
 }
@@ -630,5 +619,25 @@ extension Palette {
         private func isNearRedILine(_ hslColor: [Float]) -> Bool {
             return hslColor[0] >= 10.0 && hslColor[0] <= 37.0 && hslColor[1] <= 0.82
         }
+    }
+}
+
+extension Palette.Swatch: Hashable {
+    
+    public static func == (lhs: Palette.Swatch, rhs: Palette.Swatch) -> Bool {
+        return lhs.population == rhs.population && lhs.rgb == rhs.rgb
+    }
+    
+    public var hashValue: Int {
+        return 31 * rgb + population
+    }
+}
+
+extension Palette.Swatch {
+    public var uiColor: UIColor {
+        return UIColor(red: CGFloat(red) / 255.0,
+                       green: CGFloat(green) / 255.0,
+                       blue: CGFloat(blue) / 255.0,
+                       alpha: 1)
     }
 }
