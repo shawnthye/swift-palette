@@ -22,7 +22,7 @@ public final class Palette {
     private var mSelectedSwatches: [Target : Swatch]
     private var mUsedColors: [ColorInt: Bool]
     
-    private var dominantSwatch: Swatch?
+    public private(set) var dominantSwatch: Swatch?
     
     /**
      * Start generating a {@link Palette} with the returned {@link Builder} instance.
